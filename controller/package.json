@@ -1,0 +1,14 @@
+{
+	"name": "app_template_controller",
+	"version": "1.0.0",
+	"description": "Custom controller to manage app deployment",
+	"author": "First Last <first.last@example.com>",
+	"main": "src/server.js",
+	"scripts": {
+		"start": "node src/server.js"
+	},
+	"dependencies": {
+		"@kubernetes/client-node": "^0.17.0",
+		"express": "^4.16.1"
+	}
+}
