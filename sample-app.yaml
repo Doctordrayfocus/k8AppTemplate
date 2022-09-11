@@ -7,6 +7,6 @@ spec:
   serviceName: sample-service
   environment: development
   deploymentReplicas: 2
-  imageName:
-  imageVersion:
+  imageName: "sample-service_node_app"
+  imageVersion: "0.1"
 
