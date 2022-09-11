@@ -135,11 +135,7 @@ const applyAppTemplate = async (templateConfig) => {
 
   const templateAndEnvironmentData = { ...templateConfig, ...enviromentData };
 
-  console.log(templateAndEnvironmentData)
-
   const processedConfigs = await generateConfig(templateAndEnvironmentData);
-
-  console.log(processedConfigs)
 
   if (processedConfigs.length > 0) {
     // apply namespace first
@@ -152,13 +148,13 @@ const applyAppTemplate = async (templateConfig) => {
 
     // apply other configurations
 
-    // const otherConfig = processedConfigs.filter((configData) => {
-    //   return configData.type != 'namespace'
-    // })
+    const otherConfig = processedConfigs.filter((configData) => {
+      return configData.type != 'namespace'
+    })
 
-    // otherConfig.forEach(async (configData) => {
-    //   await applyConfiguration(configData.content)
-    // })
+    otherConfig.forEach(async (configData) => {
+      await applyConfiguration(configData.content)
+    })
   }
 
 }
