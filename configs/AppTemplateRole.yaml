@@ -7,5 +7,5 @@ metadata:
     app: app-template
 rules:
 - apiGroups: ["myapp.domain.com", ""] # "" indicates the core API group
-  resources: ["apptemplates","secrets","namespaces","deployments","pods","services"]
+  resources: ["*"]
   verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
