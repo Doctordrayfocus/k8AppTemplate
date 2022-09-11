@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: apptemplate-controller
-  namespace: app-template
 spec:
   replicas: 1
   selector:
@@ -13,9 +12,10 @@ spec:
       labels:
         app: apptemplate-controller
     spec:
+      serviceAccountName: app-template
       containers:
         - name: apptemplate
-          image: drayfocus/apptemplate-controller:0.3
+          image: drayfocus/apptemplate-controller:0.4
           ports:
             - containerPort: 8080
           imagePullPolicy: Always
