@@ -17,7 +17,7 @@ spec:
         - name: apptemplate
           image: drayfocus/apptemplate-controller:0.4
           volumeMounts:
-          - mountPath: /usr/src/app
+          - mountPath: /usr/src/app/configs
             name: controller-configs
           ports:
             - containerPort: 8080
