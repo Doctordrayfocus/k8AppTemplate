@@ -70,16 +70,23 @@ const generateConfig = async (templateConfig) => {
     };
 
     console.log(files)
-  
-    files.forEach( async(file) => {
-      const fileConfig = await readAndMakeTemplate(file);
-      console.log(fileConfig)
-      if(fileConfig) {
-        allConfigs.push(fileConfig)
-      }
-    });
 
-    resolve(allConfigs);
+    const configForAllFiles = () => {
+      return new Promise((resolve) => {
+        files.forEach( async(file) => {
+          const fileConfig = await readAndMakeTemplate(file);
+          console.log(fileConfig)
+          if(fileConfig) {
+            allConfigs.push(fileConfig)
+          }
+        });
+        resolve(allConfigs)
+      })
+    }
+  
+    const finalConfigs = await configForAllFiles();
+
+    resolve(finalConfigs);
   })
 };
 
