@@ -16,7 +16,7 @@ spec:
       automountServiceAccountToken: false
       containers:
         - name: apptemplate
-          image: drayfocus/apptemplate-controller:0.1
+          image: drayfocus/apptemplate-controller:0.2
           ports:
             - containerPort: 8080
           imagePullPolicy: Always
