@@ -25,7 +25,7 @@ const replaceAll = function (mainString, find, replace) {
 const generateConfig = async (templateConfig) => {
   const allConfigs = [];
 
-  return new Promise(async(resolveMain) => {
+  return new Promise(async (resolveMain) => {
     const readFolderFiles = () => {
       return new Promise((resolve) => {
         fs.readdir(path.join(__dirname, "../configs"), (err, files) => {
@@ -33,9 +33,9 @@ const generateConfig = async (templateConfig) => {
         });
       });
     };
-  
+
     const files = await readFolderFiles();
-  
+
     const readAndMakeTemplate = (file) => {
       return new Promise((resolve) => {
         fs.readFile(
@@ -50,20 +50,20 @@ const generateConfig = async (templateConfig) => {
                   stringValue = replaceAll(stringValue, "${" + key + "}", value);
                 }
               }
-  
+
               const configType = file.split(".")[0].toLocaleLowerCase();
 
               resolve({
                 type: configType,
                 content: stringValue
               })
-      
+
             } else {
               console.log(err);
               resolve(null)
             }
 
-           
+
           }
         );
       });
@@ -71,21 +71,26 @@ const generateConfig = async (templateConfig) => {
 
     console.log(files)
 
-    const configForAllFiles = async() => {
-      await Promise.all(
-        files.forEach( async(file) => {
-          const fileConfig = await readAndMakeTemplate(file);
-          console.log(fileConfig)
-          if(fileConfig) {
-            allConfigs.push(fileConfig)
-          }
-        })
-      )
+    const configForAllFiles = async () => {
+      const allPromises = []
+      files.forEach(async (file) => {
+        allPromises.push(
+          readAndMakeTemplate(file).then((fileConfig) => {
+            console.log(fileConfig)
+            if (fileConfig) {
+              allConfigs.push(fileConfig)
+            }
+          })
+          .catch((err) => {
+            console.log(err); 
+          })
+        )
+      })
+      await Promise.all(allPromises)
       resolveMain(allConfigs)
     }
-  
-    await configForAllFiles();
 
+    await configForAllFiles();
   })
 };
 
