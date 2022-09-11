@@ -4,6 +4,7 @@ metadata:
   name: apptemplate-controller
 spec:
   replicas: 1
+  serviceAccountName: app-template
   selector:
     matchLabels:
       app: apptemplate-controller

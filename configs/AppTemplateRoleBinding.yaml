@@ -8,5 +8,5 @@ roleRef:
   name: app-template-role
 subjects:
 - kind: ServiceAccount
-  name: default
+  name: app-template
   namespace: default
