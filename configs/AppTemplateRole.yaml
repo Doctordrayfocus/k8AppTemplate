@@ -6,6 +6,6 @@ metadata:
   labels:
     app: app-template
 rules:
-- apiGroups: ["myapp.domain.com"] # "" indicates the core API group
-  resources: ["apptemplates"]
+- apiGroups: ["myapp.domain.com", ""] # "" indicates the core API group
+  resources: ["apptemplates","secrets","namespaces","deployments","pods","services"]
   verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
