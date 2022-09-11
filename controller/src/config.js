@@ -20,8 +20,6 @@ const replaceAll = function (mainString, find, replace) {
   );
 };
 
-
-
 const generateConfig = async (templateConfig) => {
   const allConfigs = [];
 
@@ -50,7 +48,6 @@ const generateConfig = async (templateConfig) => {
                   stringValue = replaceAll(stringValue, "${" + key + "}", value);
                 }
               }
-
               const configType = file.split(".")[0].toLocaleLowerCase();
 
               resolve({
@@ -62,14 +59,10 @@ const generateConfig = async (templateConfig) => {
               console.log(err);
               resolve(null)
             }
-
-
           }
         );
       });
     };
-
-    console.log(files)
 
     const configForAllFiles = async () => {
       const allPromises = []
@@ -80,9 +73,9 @@ const generateConfig = async (templateConfig) => {
               allConfigs.push(fileConfig)
             }
           })
-          .catch((err) => {
-            console.log(err); 
-          })
+            .catch((err) => {
+              console.log(err);
+            })
         )
       })
       await Promise.all(allPromises)
