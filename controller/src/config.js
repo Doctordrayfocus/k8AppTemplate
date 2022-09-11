@@ -25,7 +25,7 @@ const replaceAll = function (mainString, find, replace) {
 const generateConfig = async (templateConfig) => {
   const allConfigs = [];
 
-  return new Promise(async(resolve) => {
+  return new Promise(async(resolveMain) => {
     const readFolderFiles = () => {
       return new Promise((resolve) => {
         fs.readdir(path.join(__dirname, "../configs"), (err, files) => {
@@ -37,7 +37,7 @@ const generateConfig = async (templateConfig) => {
     const files = await readFolderFiles();
   
     const readAndMakeTemplate = (file) => {
-      return new Promise((resolveMain) => {
+      return new Promise((resolve) => {
         fs.readFile(
           path.join(__dirname, `../configs/${file}`),
           { encoding: "utf-8" },
@@ -72,7 +72,7 @@ const generateConfig = async (templateConfig) => {
     console.log(files)
 
     const configForAllFiles = () => {
-      return new Promise((resolve) => {
+      return new Promise(() => {
         files.forEach( async(file) => {
           const fileConfig = await readAndMakeTemplate(file);
           console.log(fileConfig)
