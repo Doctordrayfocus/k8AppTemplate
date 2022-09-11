@@ -1,5 +1,8 @@
 FROM node:16
 
+# File Author / Maintainer
+MAINTAINER Ayomide Akinola <drayfocus@gmail.com>
+
 # Create app directory
 WORKDIR /usr/src/app
 
