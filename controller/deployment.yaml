@@ -28,5 +28,5 @@ spec:
       volumes: 
         - name: controller-configs
           hostPath:
-            path: "./configs"
+            path: "/configs"
 
