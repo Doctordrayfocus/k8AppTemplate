@@ -4,7 +4,6 @@ metadata:
   name: apptemplate-controller
 spec:
   replicas: 1
-  serviceAccountName: app-template
   selector:
     matchLabels:
       app: apptemplate-controller
@@ -13,6 +12,8 @@ spec:
       labels:
         app: apptemplate-controller
     spec:
+      serviceAccountName: app-template
+      automountServiceAccountToken: false
       containers:
         - name: apptemplate
           image: drayfocus/apptemplate-controller:0.1
