@@ -71,8 +71,9 @@ const generateConfig = async (templateConfig) => {
 
     console.log(files)
   
-    files.forEach(async (file) => {
+    files.forEach( async(file) => {
       const fileConfig = await readAndMakeTemplate(file);
+      console.log(fileConfig)
       if(fileConfig) {
         allConfigs.push(fileConfig)
       }
