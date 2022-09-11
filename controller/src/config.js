@@ -120,9 +120,9 @@ const applyConfiguration = async (yamlString) => {
       created.push(response.body);
     } catch (e) {
       console.log(e)
-      // // we did not get the resource, so it does not exist, so create it
-      // const response = await client.create(spec);
-      // created.push(response.body);
+      // we did not get the resource, so it does not exist, so create it
+      const response = await client.create(spec);
+      created.push(response.body);
     }
   }
   return created;
