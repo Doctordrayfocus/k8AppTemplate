@@ -1,6 +1,6 @@
 // import kubernetes client
-import * as k8s from '@kubernetes/client-node';
-import { applyAppTemplate } from './config'
+const k8s = require("@kubernetes/client-node")
+const { applyAppTemplate } = require("./config")
 require('dotenv').config()
 
 // get kubernetes configuration
@@ -11,24 +11,25 @@ kc.loadFromDefault();
 
 const k8sCustomApi = kc.makeApiClient(k8s.CustomObjectsApi);
 
-const listAppTemplates = k8sCustomApi.listClusterCustomObject(
+const listAppTemplates = () => k8sCustomApi.listNamespacedCustomObject(
 	process.env.RESOURCE_GROUP,
 	process.env.API_VERSION,
+	process.env.RESOURCE_NAMESPACE,
 	process.env.RESOURCE_NAME
 )
 
 // Create and run an informer to listen for custom app template resources
 
 const initiateInformer = () => {
-	const informer = k8s.makeInformer(kc, `/apis/${process.env.RESOURCE_GROUP}/${process.env.API_VERSION}/namespaces/*/${process.env.RESOURCE_NAME}`, listAppTemplates);
+	const informer = k8s.makeInformer(kc, `/apis/${process.env.RESOURCE_GROUP}/${process.env.API_VERSION}/namespaces/${process.env.RESOURCE_NAMESPACE}/${process.env.RESOURCE_NAME}`, listAppTemplates);
 
-	informer.on('add', (obj) => {
+	informer.on('add', async(obj) => {
 		console.log(`Added: ${obj.metadata.name}`);
-		applyAppTemplate(obj.spec)
+		await applyAppTemplate(obj.spec)
 	});
-	informer.on('update', (obj) => {
+	informer.on('update', async(obj) => {
 		console.log(`Updated: ${obj.metadata.name}`);
-		applyAppTemplate(obj.spec)
+		await applyAppTemplate(obj.spec)
 	});
 	informer.on('delete', (obj) => {
 		console.log(`Deleted: ${obj.metadata.name}`);
@@ -44,7 +45,7 @@ const initiateInformer = () => {
 	informer.start();
 }
 
-export default {
+module.exports = {
 	initiateInformer
 }
 

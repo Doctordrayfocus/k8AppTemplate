@@ -1,7 +1,7 @@
 'use strict';
 
 const express = require('express');
-import { initiateInformer } from './deployHandler'
+const { initiateInformer } = require("./deployHandler")
 
 // Constants
 const PORT = 8080;
