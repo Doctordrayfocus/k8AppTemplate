@@ -37,7 +37,7 @@ const generateConfig = async (templateConfig) => {
     const files = await readFolderFiles();
   
     const readAndMakeTemplate = (file) => {
-      return new Promise((resolve) => {
+      return new Promise((resolveMain) => {
         fs.readFile(
           path.join(__dirname, `../configs/${file}`),
           { encoding: "utf-8" },
@@ -80,13 +80,12 @@ const generateConfig = async (templateConfig) => {
             allConfigs.push(fileConfig)
           }
         });
-        resolve(allConfigs)
+        resolveMain(allConfigs)
       })
     }
   
-    const finalConfigs = await configForAllFiles();
+    await configForAllFiles();
 
-    resolve(finalConfigs);
   })
 };
 
