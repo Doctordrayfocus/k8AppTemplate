@@ -59,7 +59,7 @@ const generateConfig = async (templateConfig) => {
 						`${folder === "" ? `/${item}` : `${folder}`}`
 					);
 
-					const useConfigFolder = fileFolder === "/extras" || configsToUse.includes(fileFolder.substring(1))
+					const useConfigFolder = fileFolder.includes("extras") || configsToUse.includes(fileFolder.substring(1))
 
 					if (useConfigFolder) {
 						const allPromises = [];
