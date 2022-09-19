@@ -23,6 +23,12 @@ const replaceAll = function (mainString, find, replace) {
 const generateConfig = async (templateConfig) => {
 	const allConfigs = [];
 
+	let configsToUse = [];
+
+	if (Object.hasOwnProperty("configsToUse")) {
+		configsToUse = templateConfig.configsToUse.split(",")
+	}
+
 	return new Promise(async (resolveMain) => {
 
 		const readFolderFiles = (folder = "") => {
@@ -49,19 +55,24 @@ const generateConfig = async (templateConfig) => {
 				const itemIsFolder = item.split(".").length === 1;
 
 				if (itemIsFolder) {
-					const folderFiles = await readFolderFiles(
+					const fileFolder = await readFolderFiles(
 						`${folder === "" ? `/${item}` : `${folder}`}`
 					);
 
-					const allPromises = [];
+					const useConfigFolder = fileFolder === "/extras" || configsToUse.includes(fileFolder.substring(1))
 
-					folderFiles.files.forEach((subItem) => {
-						allPromises.push(
-							getFilesInFolders(subItem, folderFiles.folder + "/" + subItem)
-						);
-					});
+					if (useConfigFolder) {
+						const allPromises = [];
 
-					await Promise.all(allPromises);
+						fileFolder.files.forEach((subItem) => {
+							allPromises.push(
+								getFilesInFolders(subItem, fileFolder.folder + "/" + subItem)
+							);
+						});
+
+						await Promise.all(allPromises);
+					}
+
 				} else {
 					const fullFilePath = `${folder !== "" ? folder : item}`;
 
