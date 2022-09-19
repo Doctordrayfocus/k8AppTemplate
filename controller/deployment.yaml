@@ -15,7 +15,7 @@ spec:
       serviceAccountName: app-template
       containers:
         - name: apptemplate
-          image: drayfocus/apptemplate-controller:0.41
+          image: drayfocus/apptemplate-controller:0.42
           ports:
             - containerPort: 8080
           imagePullPolicy: Always
