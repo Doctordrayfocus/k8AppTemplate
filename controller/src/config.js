@@ -55,13 +55,16 @@ const generateConfig = async (templateConfig) => {
 				const itemIsFolder = item.split(".").length === 1;
 
 				if (itemIsFolder) {
-					const fileFolder = await readFolderFiles(
-						`${folder === "" ? `/${item}` : `${folder}`}`
-					);
+					const folderName = `${folder === "" ? `/${item}` : `${folder}`}`
 
-					const useConfigFolder = fileFolder.includes("extras") || configsToUse.includes(fileFolder.substring(1))
+					const useConfigFolder = folderName.includes("extras") || configsToUse.includes(folderName.substring(1))
 
 					if (useConfigFolder) {
+
+						const fileFolder = await readFolderFiles(
+							folderName
+						);
+
 						const allPromises = [];
 
 						fileFolder.files.forEach((subItem) => {
