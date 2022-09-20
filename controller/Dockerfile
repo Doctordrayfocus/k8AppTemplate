@@ -6,7 +6,7 @@ WORKDIR /usr/src/app
 # Install git
 RUN apt-get update
 
-RUN apt-get add git
+RUN apt-get install git
 
 # Install app dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
