@@ -22,7 +22,7 @@ data:
   CONFIG_REPO_URL: "https://github.com/Doctordrayfocus/AppTemplateConfigs.git"
 
   # repo sync interval (in seconds)
-  SYNC_INTERVAL: 3
+  SYNC_INTERVAL: "3"
 
 
 
