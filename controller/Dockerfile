@@ -4,9 +4,9 @@ FROM node:16
 WORKDIR /usr/src/app
 
 # Install git
-RUN apk update
+RUN apt-get update
 
-RUN apk add git
+RUN apt-get add git
 
 # Install app dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
