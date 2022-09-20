@@ -8,6 +8,9 @@ RUN apt-get update
 
 RUN apt-get install git
 
+# add configs folder
+RUN mkdir configs
+
 # Install app dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
 # where available (npm@5+)
