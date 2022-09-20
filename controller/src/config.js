@@ -57,7 +57,7 @@ const generateConfig = async (templateConfig) => {
 				if (itemIsFolder) {
 					const folderName = `${folder === "" ? `/${item}` : `${folder}`}`
 
-					const useConfigFolder = folderName.includes("extras") || configsToUse.includes(folderName.substring(1))
+					const useConfigFolder = (folderName.includes("extras") || configsToUse.includes(folderName.substring(1))) && !folderName.includes(".git")
 
 					if (useConfigFolder) {
 

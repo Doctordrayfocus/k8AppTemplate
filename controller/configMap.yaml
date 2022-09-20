@@ -18,5 +18,12 @@ data:
   # default custom resource namespace
   RESOURCE_NAMESPACE: "default"
 
+  # git repo url for template config files
+  CONFIG_REPO_URL: "https://github.com/Doctordrayfocus/AppTemplateConfigs.git"
+
+  # repo sync interval (in seconds)
+  SYNC_INTERVAL: 3
+
+
 
   

@@ -1,10 +1,12 @@
 FROM node:16
 
-# File Author / Maintainer
-MAINTAINER Ayomide Akinola <drayfocus@gmail.com>
-
 # Create app directory
 WORKDIR /usr/src/app
+
+# Install git
+RUN apk update
+
+RUN apk add git
 
 # Install app dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied

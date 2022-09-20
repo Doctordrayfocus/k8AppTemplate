@@ -2,6 +2,7 @@
 
 const express = require('express');
 const { initiateInformer } = require("./deployHandler")
+const { syncRemoteConfigs } = require("./syncConfig")
 
 // Constants
 const PORT = 8080;
@@ -12,6 +13,9 @@ const app = express();
 app.get('/', (req, res) => {
 	res.send('Custom controller is running');
 });
+
+// synchronize remote configuration
+syncRemoteConfigs()
 
 // initiate controller
 initiateInformer()
