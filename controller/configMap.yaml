@@ -24,6 +24,9 @@ data:
   # repo sync interval (in seconds)
   SYNC_INTERVAL: "3"
 
+  # enable debug
+  DEBUG: "true"
+
 
 
   

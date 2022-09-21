@@ -27,6 +27,11 @@ const generateConfig = async (templateConfig) => {
 
 	if (Object.hasOwnProperty("configsToUse")) {
 		configsToUse = templateConfig.configsToUse.split(",")
+		if (process.env.DEBUG) {
+			console.log({
+				configsToUse
+			})
+		}
 	}
 
 	return new Promise(async (resolveMain) => {
@@ -58,6 +63,10 @@ const generateConfig = async (templateConfig) => {
 					const folderName = `${folder === "" ? `/${item}` : `${folder}`}`
 
 					const useConfigFolder = (folderName.includes("extras") || configsToUse.includes(folderName.substring(1))) && !folderName.includes(".git")
+
+					if (process.env.DEBUG) {
+						console.log('folder detected: ' + folderName)
+					}
 
 					if (useConfigFolder) {
 
