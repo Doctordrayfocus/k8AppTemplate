@@ -199,25 +199,30 @@ const applyAppTemplate = async (templateConfig) => {
 
 	const processedConfigs = await generateConfig(templateAndEnvironmentData);
 
-	if (processedConfigs.length > 0) {
-		// apply namespace first
+	try {
+		if (processedConfigs.length > 0) {
+			// apply namespace first
 
-		const namespaceConfig = processedConfigs.filter((configData) => {
-			return configData.type == 'namespace'
-		})
+			const namespaceConfig = processedConfigs.filter((configData) => {
+				return configData.type == 'namespace'
+			})
 
-		await applyConfiguration(namespaceConfig[0].content)
+			await applyConfiguration(namespaceConfig[0].content)
 
-		// apply other configurations
+			// apply other configurations
 
-		const otherConfig = processedConfigs.filter((configData) => {
-			return configData.type != 'namespace'
-		})
+			const otherConfig = processedConfigs.filter((configData) => {
+				return configData.type != 'namespace'
+			})
 
-		otherConfig.forEach(async (configData) => {
-			await applyConfiguration(configData.content)
-		})
+			otherConfig.forEach(async (configData) => {
+				await applyConfiguration(configData.content)
+			})
+		}
+	} catch (error) {
+		console.log(error)
 	}
+
 
 }
 
