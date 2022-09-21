@@ -32,6 +32,9 @@ spec:
                   type: string
                 imageVersion:
                   type: string
+                configsToUse:
+                  type: string
+                  default: ""
   # either Namespaced or Cluster
   scope: Namespaced
   names:
